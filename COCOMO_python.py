@@ -28,3 +28,5 @@ def fround(x):
     x = x + 0.5
     a = x
     return a
+
+main()
