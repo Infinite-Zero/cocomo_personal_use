@@ -19,9 +19,9 @@ def calculate(table, n, mode, size):
     time = table[model][2] * effort ** table[model][3]
     staff = effort / time
 
-    print("\nEffort = ", effort, "Person-Month")
-    print("\nDevelopement Time = ", time, "Month")
-    print("\nAverage Staff Required = ", fround(staff), "Persons")
+    print("Effort = ", round(effort,4), "Person-Month")
+    print("Developement Time = ", round(time,6), "Month")
+    print("Average Staff Required = ", round(fround(staff)), "Persons")
     return
     
 def fround(x):
