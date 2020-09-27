@@ -1,0 +1,80 @@
+import sys
+from io import StringIO
+import unittest
+import COCOMO_python
+
+class TestCocomo(unittest.TestCase):
+
+    def test_calculateMode(self):
+
+        table = [[2.4, 1.05, 2.5, 0.38], [3.0, 1.12, 2.5, 0.35], [3.6, 1.20, 2.5, 0.32]]
+        mode = ["Organic", "Semi-Detached", "Embedded"]
+        size = 4
+
+        # Capture stdout as calculate doesn't return anything
+        sys.stdout = StringIO()
+        COCOMO_python.calculate(table, 3, mode, size)
+        org = sys.stdout.getvalue()
+
+        table = [[1]*100, [1]*100, [1]*100]
+        mode = ["Organic", "Semi-Detached", "Embedded"]
+        size = 51
+
+        COCOMO_python.calculate(table, 3, mode, size)
+        semi = sys.stdout.getvalue()
+
+        table = [[1]*400, [1]*400, [1]*400]
+        mode = ["Organic", "Semi-Detached", "Embedded"]
+        size = 400
+
+        COCOMO_python.calculate(table, 3, mode, size)
+        em = sys.stdout.getvalue()
+
+        # Using regex, determine that the correct mode is in the correct place
+        self.assertRegex(org,"The mode is\\s*Organic\\.*") # Test Organic
+        self.assertRegex(semi, "The mode is\\s*Semi-Detached\\.*") # Test Semi-Detached
+        self.assertRegex(em, "The mode is\\s*Embedded\\.*") # Test Embedded
+
+
+    def test_calculateEffort(self):
+
+        table = [[2.4, 1.05, 2.5, 0.38], [3.0, 1.12, 2.5, 0.35], [3.6, 1.20, 2.5, 0.32]]
+        mode = ["Organic", "Semi-Detached", "Embedded"]
+        size = 4
+
+        # Capture stdout as calculate doesn't return anything
+        sys.stdout = StringIO()
+        COCOMO_python.calculate(table, 3, mode, size)
+        op = sys.stdout.getvalue()
+
+        # Using regex, determine that the correct value of effort is in the correct place
+        self.assertRegex(op, "\\.*Effort =\\s*10.289\\.*")
+
+    def test_calculateDevelopmentTime(self):
+        table = [[2.4, 1.05, 2.5, 0.38], [3.0, 1.12, 2.5, 0.35], [3.6, 1.20, 2.5, 0.32]]
+        mode = ["Organic", "Semi-Detached", "Embedded"]
+        size = 4
+
+        # Capture stdout as calculate doesn't return anything
+        sys.stdout = StringIO()
+        COCOMO_python.calculate(table, 3, mode, size)
+        op = sys.stdout.getvalue()
+
+        # Using regex, determine that the correct value of effort is in the correct place
+        self.assertRegex(op, "\\.*Development Time =\\s*6.062367\\.*")
+
+    def test_calculateAverageStaffRequired(self):
+        table = [[2.4, 1.05, 2.5, 0.38], [3.0, 1.12, 2.5, 0.35], [3.6, 1.20, 2.5, 0.32]]
+        mode = ["Organic", "Semi-Detached", "Embedded"]
+        size = 4
+
+        # Capture stdout as calculate doesn't return anything
+        sys.stdout = StringIO()
+        COCOMO_python.calculate(table, 3, mode, size)
+        op = sys.stdout.getvalue()
+
+        # Using regex, determine that the correct value of effort is in the correct place
+        self.assertRegex(op, "\\.*Average Staff Required =\\s*2\\.*")
+
+if __name__ == '__main__':
+    unittest.main()
