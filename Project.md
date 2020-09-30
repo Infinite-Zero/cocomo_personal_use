@@ -19,15 +19,27 @@ Since the sources had the same values, the numbers used between the codes were t
 Output
 
 Organic: Mean = 1.5825 Min = 0.38 Max = 2.5
+
 Semi-Detached: Mean = 1.7425 Min = 0.35 Max = 3.0
+
 Embedded: Mean = 1.905 Min = 0.32 Max = 3.6
+
 Python Output-----
+
 The mode is Organic
+
 Effort = 10.289 Person-Month
+
 Development Time = 6.06237 Months
+
 Average Staff Required = 2 Persons
+
 Java Output-------
+
 The mode is Organic
+
 Effort = 10.289 Person-Month
+
 Development Time = 6.06237 Months
+
 Average Staff Required = 2 Persons
