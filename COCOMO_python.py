@@ -1,4 +1,10 @@
-def main():
+from flask import Flask
+# If `entrypoint` is not defined in app.yaml, App Engine will look for an app
+# called `app` in `main.py`.
+app = Flask(__name__)
+@app.route('/')
+
+def cocomo():
     table = [[2.4,1.05,2.5,0.38],[3.0,1.12,2.5,0.35],[3.6,1.20,2.5,0.32]]
     mode = ["Organic","Semi-Detached","Embedded"]
     size = 4
@@ -29,4 +35,8 @@ def fround(x):
     a = x
     return a
 
-main()
+if __name__ == '__main__':
+    # This is used when running locally only. When deploying to Google App
+    # Engine, a webserver process such as Gunicorn will serve the app. This
+    # can be configured by adding an `entrypoint` to app.yaml.
+    app.run(host='127.0.0.1', port=8080, debug=True)
